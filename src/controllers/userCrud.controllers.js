@@ -18,7 +18,14 @@ const create = catchError(async(req, res) => {
     return res.status(201).jaon(userCrud)
 });
 
+const remove = catchError(async(req, res) => {
+    const { id } = req.params;
+    await UserCrud.destroy({ where: { id: id }})
+    return res.sendStatus(204);
+})
+
 module.exports = {
     getAll,
     create,
+    remove,
 }
