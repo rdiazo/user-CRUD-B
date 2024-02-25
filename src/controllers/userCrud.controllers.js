@@ -22,10 +22,28 @@ const remove = catchError(async(req, res) => {
     const { id } = req.params;
     await UserCrud.destroy({ where: { id: id }})
     return res.sendStatus(204);
-})
+});
+
+const getOne = catchError(async(req, res) => {
+        const { id } = req.params;
+        const userCrud = await UserCrud.findByPk(id);
+        return res.jaon(userCrud);
+});
+
+const update = catchError(async(req, res) => {
+    const { id } = req.params;
+    const { first_name, last_name, email, password, birthday } = req.body;
+    const userCrud = await UserCrud.update({
+        first_name, last_name, email, password, birthday
+    }, { where: id, returning: true });
+    return res.json(userCrud);
+});
+
 
 module.exports = {
     getAll,
     create,
     remove,
+    getOne,
+    update,
 }
