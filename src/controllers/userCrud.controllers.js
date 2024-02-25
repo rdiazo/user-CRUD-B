@@ -27,7 +27,7 @@ const remove = catchError(async(req, res) => {
 const getOne = catchError(async(req, res) => {
         const { id } = req.params;
         const userCrud = await UserCrud.findByPk(id);
-        return res.jaon(userCrud);
+        return res.json(userCrud);
 });
 
 const update = catchError(async(req, res) => {
@@ -35,7 +35,7 @@ const update = catchError(async(req, res) => {
     const { first_name, last_name, email, password, birthday } = req.body;
     const userCrud = await UserCrud.update({
         first_name, last_name, email, password, birthday
-    }, { where: id, returning: true });
+    }, { where: { id: id }, returning: true });
     return res.json(userCrud);
 });
 
