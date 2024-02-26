@@ -15,7 +15,7 @@ const create = catchError(async(req, res) => {
         password: password,
         birthday: birthday,
     });
-    return res.status(201).jaon(userCrud)
+    return res.status(201).json(userCrud)
 });
 
 const remove = catchError(async(req, res) => {
@@ -36,7 +36,7 @@ const update = catchError(async(req, res) => {
     const userCrud = await UserCrud.update({
         first_name, last_name, email, password, birthday
     }, { where: { id: id }, returning: true });
-    return res.json(userCrud);
+    return res.json(userCrud[1][0]);
 });
 
 

@@ -4,7 +4,7 @@ const express = require('express');
 const userCrudRouter = express.Router();
 
 userCrudRouter.route("/users")
-		.get(getAll)
+	.get(getAll)
         .post(create);
 
 userCrudRouter.route("/users/:id")
